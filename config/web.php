@@ -1,30 +1,28 @@
 <?php
 
-$params = require __DIR__ . '/params.php';
-$db = require __DIR__ . '/db.php';
+$params = require(__DIR__ . '/params.php');
 
 $config = [
     'id' => 'basic',
+    'name' => 'Ksetrin\'s home page',
     'basePath' => dirname(__DIR__),
+    'language' => 'ru-RU',
+    'timeZone' => 'Asia/Yekaterinburg',
     'bootstrap' => ['log'],
-    'aliases' => [
-        '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
-    ],
     'components' => [
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => '',
+            'cookieValidationKey' => '111000111',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\modules\user\models\User',
             'enableAutoLogin' => true,
+            'loginUrl' => ['user/default/login'],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'main/default/error',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
@@ -42,34 +40,75 @@ $config = [
                 ],
             ],
         ],
-        'db' => $db,
-        /*
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
+        'db' => require(__DIR__ . '/db.php'),
+		'urlManager' => [
+
+			'enablePrettyUrl' => true,
+			'showScriptName' => false,
+            'enableStrictParsing' => true,
+			'rules' => [
+                '/' => 'main/default/index',
+                'blog' => 'blog/post/index',
+                    'blog/post/<slug:[\w-]+>' => 'blog/post/viewslug',
+                'example' => 'example/default/index',
+                'about' => 'main/default/about',
+                'contact' => 'main/contact/index',
+                '<controller>/<action>' => '<controller>/<action>',
+                '<module>/<controller>/<action>' => '<module>/<controller>/<action>',
+			]
+		],
+		/*'formatter' => [
+            'class' => 'yii\i18n\Formatter',
+            'booleanFormat'=>['Нет','Да'],
+            'dateFormat' => 'php:d.m.Y',         //Тут можно формат вывода дат по умолчанию настроить
+            'datetimeFormat' => 'php:d.m.Y H:i',
+            'timeFormat' => 'short',         
+            'nullDisplay'=>'Не задано',
+        ],*/
+		'view' => [
+			'theme' => [
+			  'class' => 'yii\base\Theme',
+			  'pathMap' => ['@app/views' => '@app/web/themes/ksetrin'],
+			  'baseUrl' => '@web/themes/ksetrin'
+			]
+		],
+        'sendGrid' => [
+            'class' => 'bryglen\sendgrid\Mailer',
+            'username' => 'app34816753@heroku.com',
+            'password' => 'nv8sjmdr9622',
+            //'viewPath' => '@app/views/mail', // your view path here
         ],
-        */
+    ],
+	'modules' => [
+        'main' => [
+            'class' => 'app\modules\main\Module',
+        ],
+		'user' => [
+            'class' => 'app\modules\user\Module',
+        ],
+		'blog' => [
+            'class' => 'app\modules\blog\Module',
+        ],
+        'admin' => [
+            'class' => 'app\modules\admin\Module',
+        ],
+        'project' => [
+            'class' => 'app\modules\project\Module',
+        ],
+        'example' => [
+            'class' => 'app\modules\example\Module',
+        ],
     ],
     'params' => $params,
 ];
 
-if (YII_ENV_DEV) {
-    // configuration adjustments for 'dev' environment
+if (YII_ENV_DEV) { // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';
-    $config['modules']['debug'] = [
-        'class' => 'yii\debug\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
-    ];
-
     $config['bootstrap'][] = 'gii';
-    $config['modules']['gii'] = [
-        'class' => 'yii\gii\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
-    ];
+    $config['modules']['debug'] = 'yii\debug\Module';
+    $config['modules']['gii'] = 'yii\gii\Module';
+//    $config['components']['urlManager']['baseUrl'] = 'http://localhost/kse2modules/web';
+    //'baseUrl' => 'http://localhost/kse2modules/web',
 }
 
 return $config;
