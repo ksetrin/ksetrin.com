@@ -1,0 +1,14 @@
+{
+    "directory" : "vendor/bower",
+    "registry": {
+        "search": [
+            "https://registry.bower.io"
+        ]
+    },
+    "public": {
+        "disabled": false,
+        "registry": "https://registry.bower.io"
+    },
+    "timeout": 14400,
+    "strict-ssl": false
+}
