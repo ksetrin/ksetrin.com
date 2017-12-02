@@ -7,6 +7,8 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use app\modules\user\models\LoginForm;
+use yii\web\UploadedFile;
+
 
 class DefaultController extends Controller
 {
@@ -40,7 +42,9 @@ class DefaultController extends Controller
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        $model->load(Yii::$app->request->post());
+        $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+        if ($model->login()) {
             return $this->goBack();
         } else {
             return $this->render('login', [

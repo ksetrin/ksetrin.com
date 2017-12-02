@@ -2,44 +2,26 @@
 
 namespace app\modules\user\models;
 
-use app\modules\user\models\User;
 use Yii;
 use yii\base\Model;
 
-/**
- * LoginForm is the model behind the login form.
- */
 class LoginForm extends Model
 {
-    public $username;
-    public $password;
-    public $rememberMe = true;
+    public $username = 'admin';
+    public $imageFile;
+    public $rememberMe = false;
 
     private $_user = false;
 
 
-    /**
-     * @return array the validation rules.
-     */
     public function rules()
     {
         return [
-            // username and password are both required
-            [['username', 'password'], 'required'],
-            // rememberMe must be a boolean value
+            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
             ['rememberMe', 'boolean'],
-            // password is validated by validatePassword()
-            ['password', 'validatePassword'],
         ];
     }
 
-    /**
-     * Validates the password.
-     * This method serves as the inline validation for password.
-     *
-     * @param string $attribute the attribute currently being validated
-     * @param array $params the additional name-value pairs given in the rule
-     */
     public function validatePassword($attribute, $params)
     {
         if (!$this->hasErrors()) {
@@ -57,18 +39,17 @@ class LoginForm extends Model
      */
     public function login()
     {
-        if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
+        if ($this->validate()
+            && hash_file('sha512', $this->imageFile->tempName) === "ed10cf76864796f59fcc73b0506dd40e390f464347637c7d27947bd037d39bbbc9e083cbb7691c8571610b5dbd146b7092d2eec0f25ddfbe7f92f44b7a35924c"
+            ) {
+            $this->imageFile->reset();
+            return Yii::$app->user->login($this->getUser()); //, $this->rememberMe ? 3600*24*30 : 0
         } else {
             return false;
         }
     }
 
-    /**
-     * Finds user by [[username]]
-     *
-     * @return User|null
-     */
+
     public function getUser()
     {
         if ($this->_user === false) {
