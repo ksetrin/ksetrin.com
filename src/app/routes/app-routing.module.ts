@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {MainLayoutComponent} from '../layouts/main-layout/main-layout.component';
 import {HomeScreenComponent} from '../screens/user/home-screen/home-screen.component';
 import {PostScreenComponent} from '../screens/user/post-screen/post-screen.component';
+import {PageNotFoundComponent} from '../screens/page-not-found/page-not-found.component';
 
 
 const routes: Routes = [
@@ -12,7 +13,11 @@ const routes: Routes = [
       {path: '', component: HomeScreenComponent},
       {path: 'post/:id', component: PostScreenComponent},
     ]
-  }
+  },
+  {
+    path: 'admin', loadChildren: () => import('../modules/admin.module').then(m => m.AdminModule),
+  },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
