@@ -7,6 +7,7 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 import { HomeScreenComponent } from './screens/user/home-screen/home-screen.component';
 import { PostScreenComponent } from './screens/user/post-screen/post-screen.component';
 import { PageNotFoundComponent } from './screens/page-not-found/page-not-found.component';
+import { PostPreviewComponent } from './components/post-preview/post-preview.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { PageNotFoundComponent } from './screens/page-not-found/page-not-found.c
     HomeScreenComponent,
     PostScreenComponent,
     PageNotFoundComponent,
+    PostPreviewComponent,
   ],
   imports: [
     BrowserModule,
