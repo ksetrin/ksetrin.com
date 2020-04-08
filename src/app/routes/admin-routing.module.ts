@@ -10,7 +10,7 @@ const routes: Routes = [
     path: '', component: AdminLayoutComponent, children: [
       {path: 'login', component: LoginScreenComponent},
       {path: 'dashboard', component: DashboardScreenComponent},
-      {path: 'create', component: CreateScreenComponent},
+      {path: 'create/:id', component: CreateScreenComponent},
     ]
   }
 ];
