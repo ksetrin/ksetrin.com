@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-todo-list',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TodoListComponent implements OnInit {
 
+  todoList = [];
+  todoItem = new FormControl('', [Validators.required]);
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  add() {
+    this.todoList.push(this.todoItem.value);
+    this.todoItem.reset();
+  }
 }

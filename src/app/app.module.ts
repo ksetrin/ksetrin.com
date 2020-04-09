@@ -9,6 +9,7 @@ import { PostScreenComponent } from './screens/user/post-screen/post-screen.comp
 import { PageNotFoundComponent } from './screens/page-not-found/page-not-found.component';
 import { PostPreviewComponent } from './components/post-preview/post-preview.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { TodoListComponent } from './components/todo-list/todo-list.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
