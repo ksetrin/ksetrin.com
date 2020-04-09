@@ -7,7 +7,15 @@
 
   <div class="list">
     <ul>
-      <li *ngFor="let item of todoList">{{item}}</li>
+      <li *ngFor="let item of todoList">
+        <input (change)="doneToggle(item.id)" [checked]="item.done" class="done-btn" type="checkbox">
+        <span [ngClass]="{completed: item.done}">{{item.value}}</span>
+        <button (click)="remove(item.id)">remove</button>
+      </li>
     </ul>
+  </div>
+
+  <div>
+    <pre>{{todoList | json}}</pre>
   </div>
 </div>
