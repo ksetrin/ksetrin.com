@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {User} from '../../../types/user';
 
 @Component({
   selector: 'app-login-screen',
@@ -25,11 +26,12 @@ export class LoginScreenComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.loginForm);
-    console.log('+kse', this.loginForm.get('email'));
     if (this.loginForm.invalid) {
       return;
     }
-
+    const user: User = {
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password,
+    };
   }
 }
