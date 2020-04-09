@@ -8,6 +8,7 @@ import { HomeScreenComponent } from './screens/user/home-screen/home-screen.comp
 import { PostScreenComponent } from './screens/user/post-screen/post-screen.component';
 import { PageNotFoundComponent } from './screens/page-not-found/page-not-found.component';
 import { PostPreviewComponent } from './components/post-preview/post-preview.component';
+import { TodoListComponent } from './components/todo-list/todo-list.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { PostPreviewComponent } from './components/post-preview/post-preview.com
     PostScreenComponent,
     PageNotFoundComponent,
     PostPreviewComponent,
+    TodoListComponent,
   ],
   imports: [
     BrowserModule,
