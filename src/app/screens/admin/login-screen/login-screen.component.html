@@ -1,1 +1,22 @@
-<p>login-screen works!</p>
+<form [formGroup]="loginForm" (ngSubmit)="submit()" >
+  <h2>Log in</h2>
+
+  <div>
+    <label for="email">Email</label>
+    <input type="email" id="email" formControlName="email">
+    <div class="validation">
+      <div class="error">error</div>
+    </div>
+  </div>
+
+  <div>
+    <label for="password">Password</label>
+    <input type="password" id="password" formControlName="password">
+    <div class="validation">
+      <div class="error">error</div>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="loginForm.invalid">Login</button>
+</form>
+

@@ -9,7 +9,6 @@ import {PageNotFoundComponent} from '../screens/page-not-found/page-not-found.co
 const routes: Routes = [
   {
     path: '', component: MainLayoutComponent, children: [
-      // {path: '', redirectTo: '/', pathMatch: 'full'},
       {path: '', component: HomeScreenComponent},
       {path: 'post-preview/:id', component: PostScreenComponent},
     ]

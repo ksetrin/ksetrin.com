@@ -5,6 +5,7 @@ import {AdminRoutingModule} from '../routes/admin-routing.module';
 import {LoginScreenComponent} from '../screens/admin/login-screen/login-screen.component';
 import {CreateScreenComponent} from '../screens/admin/create-screen/create-screen.component';
 import {DashboardScreenComponent} from '../screens/admin/dashboard-screen/dashboard-screen.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,8 @@ import {DashboardScreenComponent} from '../screens/admin/dashboard-screen/dashbo
   imports: [
     CommonModule,
     AdminRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
 })
 export class AdminModule {}
